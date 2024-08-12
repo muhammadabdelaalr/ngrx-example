@@ -1,0 +1,144 @@
+@layer bootstrap, primeng;
+@import "bootstrap/scss/bootstrap.scss" layer(bootstrap);
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.min.css";
+
+
+* {
+    box-sizing: border-box;
+}
+
+
+
+html,
+body {
+    height: 100%;
+    // font-size: max(calc(5px + 0.3vw), 8px);
+    font-size: 10px;
+}
+
+
+
+:root {
+
+    --basicColor: rgba(3, 120, 163, 0.647);
+    --dangerColor:#d64278d4;
+    --successColor:rgba(239, 203, 20, 0.954);
+
+
+}
+
+.primary-color {
+    color: var(--basicColor);
+}
+
+.danger-color {
+    color: var(--dangerColor);
+}
+
+.primary-btn {
+
+
+    padding: 10px 20px;
+    background-color: var(--basicColor);
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #ffffff;
+        color: var(--basicColor);
+        border: solid 1px var(--basicColor);
+        cursor: pointer !important;
+
+    }
+
+    &:disabled {
+        opacity: .5;
+        pointer-events: none;
+    }
+}
+
+
+.danger-btn {
+
+    padding: 10px 20px;
+    background-color: var(--dangerColor);
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #ffffff;
+        color: var(--dangerColor);
+        border: solid 1px var(--dangerColor);
+        cursor: pointer !important;
+    }
+}
+.edit-btn {
+
+    padding: 10px 20px;
+    background-color: var(--successColor);
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #ffffff;
+        color: var(--successColor);
+        border: solid 1px var(--successColor);
+        cursor: pointer !important;
+    }
+}
+
+.icon {
+    width: 2rem;
+    height: 2rem;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+.product-card {
+    border-radius: 0.5em;
+    box-shadow: 0px 0px 30px -3px rgba(0, 0, 0, 0.1), 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+
+    transition: .4s ease;
+
+    &:hover {
+        transform: scale(1.02);
+
+    }
+    .img-container {
+        width: 100%;
+        height: 50%;
+    }
+    .product-body{
+        .product-title
+        {
+            font-size: 1.6rem;
+            font-weight: 700;
+           color: var(--basicColor);
+
+        }
+        .product-price
+        {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: rgb(50, 43, 3);
+        }
+        .product-availability
+        {
+            font-size: 1.2rem;
+            font-weight: 500;
+
+
+        }
+
+    }
+}
