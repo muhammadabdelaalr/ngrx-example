@@ -1,0 +1,64 @@
+{
+  "categories": [
+    {
+      "id": "1",
+      "name": "Category 1"
+    },
+    {
+      "id": "2",
+      "name": "Category 2"
+    },
+    {
+      "id": "3",
+      "name": "Category 3"
+    },
+    {
+      "id": "4",
+      "name": "Category 4"
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "name": "Item 1",
+      "desc": "Description of Item 1",
+      "category": "Category 1",
+      "img": "/1.jpg"
+    },
+    {
+      "id": "2",
+      "name": "Item 2",
+      "desc": "Description of Item 2",
+      "category": "Category 2",
+      "img": "/2.jpg"
+    },
+    {
+      "id": "3",
+      "name": "Item 3",
+      "desc": "Description of Item 3",
+      "category": "Category 2",
+      "img": "/3.jpg"
+    },
+    {
+      "name": "Item 4",
+      "desc": "Description of Item 4",
+      "category": "Category 4",
+      "img": "/4.jpg",
+      "id": "4"
+    },
+    {
+      "name": "Item 5",
+      "desc": "Description of Item 5",
+      "category": "Category 2",
+      "img": "/5.jpg",
+      "id": "5"
+    },
+    {
+      "id": "97b3",
+      "name": "item ",
+      "desc": "desc",
+      "category": "Category 4",
+      "img": "https://picsum.photos/300/200"
+    }
+  ]
+}
