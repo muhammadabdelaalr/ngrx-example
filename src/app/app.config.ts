@@ -10,6 +10,7 @@ import { provideRouterStore } from '@ngrx/router-store';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools'
 import { appState } from './store/app.state';
+import { provideEffects } from '@ngrx/effects';
 
 
 export const appConfig: ApplicationConfig = {
@@ -19,6 +20,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideRouterStore(),
     provideStore(appState),
+    provideEffects(),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideClientHydration()
