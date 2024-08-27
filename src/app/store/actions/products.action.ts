@@ -2,7 +2,11 @@ import { createAction, props } from "@ngrx/store";
 import { Product } from "../../core/interface/interface";
 
 export const loadProducts = createAction(
-  '[Products] Load Products', props<{ products: Product[] }>()
+  '[Products] Load Products'
+);
+
+export const setProducts = createAction(
+  '[Products] set Products', props<{ products: Product[] }>()
 );
 
 export const addProduct = createAction(

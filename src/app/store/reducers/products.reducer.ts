@@ -7,7 +7,7 @@ export const initialState: any = {
 };
 
 export const productsReducer = createReducer(initialState,
-  on(productsActions.loadProducts, (state, { products }) => ({
+  on(productsActions.setProducts, (state, { products }) => ({
     ...state,
     products,
   })),

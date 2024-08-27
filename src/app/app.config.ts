@@ -11,6 +11,8 @@ import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools'
 import { appState } from './store/app.state';
 import { provideEffects } from '@ngrx/effects';
+import { ProductsEffects } from './store/effects/products.effects';
+import { CategoriesEffects } from './store/effects/categories.effects';
 
 
 export const appConfig: ApplicationConfig = {
@@ -20,7 +22,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideRouterStore(),
     provideStore(appState),
-    provideEffects(),
+    provideEffects(ProductsEffects, CategoriesEffects),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideClientHydration()

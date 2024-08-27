@@ -33,16 +33,16 @@
       "img": "/2.jpg"
     },
     {
-      "id": "3",
       "name": "Item 3",
       "desc": "Description of Item 3",
-      "category": "Category 2",
-      "img": "/3.jpg"
+      "category": "Category 1",
+      "img": "/3.jpg",
+      "id": "3"
     },
     {
       "name": "Item 4",
       "desc": "Description of Item 4",
-      "category": "Category 4",
+      "category": "Category 3",
       "img": "/4.jpg",
       "id": "4"
     },
@@ -54,11 +54,11 @@
       "id": "5"
     },
     {
-      "id": "97b3",
-      "name": "item ",
+      "name": "item 6",
       "desc": "desc",
       "category": "Category 4",
-      "img": "https://picsum.photos/300/200"
+      "img": "https://picsum.photos/300/200",
+      "id": "97b3"
     }
   ]
 }

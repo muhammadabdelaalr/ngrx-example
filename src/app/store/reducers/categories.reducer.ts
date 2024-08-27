@@ -7,5 +7,5 @@ export const initialState: any = {
 };
 
 export const categoriesReducer = createReducer(initialState,
-  on(categoriesActions.loadCategories, (state, {categories}) => ({...state, categories})),
+  on(categoriesActions.setCategories, (state, {categories}) => ({...state, categories})),
 )

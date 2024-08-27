@@ -5,11 +5,11 @@ import { decrement, increment, reset } from './store/actions/counter.action';
 import { AppState } from './store/app.state';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { ApisService } from './core/apis.service';
-import { Observable, Subject, take, takeUntil } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { Category, Product } from './core/interface/interface';
 import { selectProduct } from './store/selectors/products.selector';
-import { addProduct, deleteProduct, editProduct, loadProducts } from './store/actions/products.action';
-import { loadCategories } from './store/actions/categories.action';
+import * as productsActions from './store/actions/products.action';
+import * as categoriesActions from './store/actions/categories.action';
 import { selectCategories } from './store/selectors/categories.selector';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
 
   isEdit: boolean = false;
 
-  id = '';
+  private id = '';
 
   count$ = this.store.select('counter');
 
@@ -66,20 +66,16 @@ export class AppComponent implements OnInit {
   }
 
   loadCategories() {
-    this.api.getCategories().pipe(takeUntil(this.destroy)).subscribe((categories: Category[]) => {
-      this.store.dispatch(loadCategories({ categories }));
-    })
+    this.store.dispatch(categoriesActions.loadCategories())
   }
 
   loadProducts() {
-    this.api.getProducts().pipe(takeUntil(this.destroy)).subscribe((products: Product[]) => {
-      this.store.dispatch(loadProducts({ products }));
-    })
+    this.store.dispatch(productsActions.loadProducts());
   }
   addProduct() {
     if (this.createForm.valid) {
       this.api.addProduct(this.createForm.value).pipe(takeUntil(this.destroy)).subscribe((product: Product) => {
-        this.store.dispatch(addProduct({ product }));
+        this.store.dispatch(productsActions.addProduct({ product }));
         this.createForm.reset();
       })
     }
@@ -97,7 +93,7 @@ export class AppComponent implements OnInit {
     this.api.editProduct(this.id, this.createForm.value).pipe(takeUntil(this.destroy)).subscribe(() => {
       this.isEdit = false;
       const product = { id: this.id, ...this.createForm.value };
-      this.store.dispatch(editProduct( product ));
+      this.store.dispatch(productsActions.editProduct( product ));
       this.id = '';
       this.createForm.reset();
     })
@@ -106,7 +102,7 @@ export class AppComponent implements OnInit {
   deleteProduct(product: Product) {
     const id = product.id || '';
     this.api.deleteProduct(id).pipe(takeUntil(this.destroy)).subscribe(() => {
-      this.store.dispatch(deleteProduct(id));
+      this.store.dispatch(productsActions.deleteProduct(id));
     });
   }
 
