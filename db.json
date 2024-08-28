@@ -19,18 +19,18 @@
   ],
   "products": [
     {
-      "id": "1",
       "name": "Item 1",
       "desc": "Description of Item 1",
       "category": "Category 1",
-      "img": "/1.jpg"
+      "img": "/1.jpg",
+      "id": "1"
     },
     {
-      "id": "2",
       "name": "Item 2",
       "desc": "Description of Item 2",
       "category": "Category 2",
-      "img": "/2.jpg"
+      "img": "/2.jpg",
+      "id": "2"
     },
     {
       "name": "Item 3",
@@ -54,11 +54,11 @@
       "id": "5"
     },
     {
+      "id": "97b3",
       "name": "item 6",
       "desc": "desc",
-      "category": "Category 4",
-      "img": "https://picsum.photos/300/200",
-      "id": "97b3"
+      "category": "Category 3",
+      "img": "https://picsum.photos/300/200"
     }
   ]
 }

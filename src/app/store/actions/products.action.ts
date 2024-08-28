@@ -20,3 +20,7 @@ export const editProduct = createAction(
 export const deleteProduct = createAction(
   '[Products] Delete Product', (id: string) => ({ id })
 )
+
+export const loadProductsFailure = createAction(
+  '[Products] Load Products Failure', props<{ error: string }>()
+);
