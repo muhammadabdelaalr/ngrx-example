@@ -71,9 +71,9 @@ export class ProductsComponent implements OnInit {
 
 reqStatus(status: number) {
   this._http.getStatus(status).pipe(takeUntil(this.destroy)).subscribe({
-    next: (res) => console.log(res),
-    error: (err) => console.log(err),
-    complete: () => console.log('complete')
+    next: (res) => {},
+    error: (err) => {},
+    complete: () => {}
   });
 }
 
