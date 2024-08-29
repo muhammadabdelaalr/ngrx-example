@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Category, Product } from '../interface/interface';
+import { Category } from '../interface/interface';
+import { Product } from '../../modules/products/interfaces/products.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ export class ApisService {
   baseUrl = 'http://localhost:3000/';
 
   http = inject(HttpClient);
+  
   constructor() { }
 
   getCategories() {

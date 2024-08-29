@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Product } from "../../core/interface/interface";
+import { Product } from "../interfaces/products.interface";
 
 export const loadProducts = createAction(
   '[Products] Load Products'
@@ -11,6 +11,10 @@ export const setProducts = createAction(
 
 export const addProduct = createAction(
   '[Products] Add Product', props<{ product: Product }>()
+)
+
+export const selectProductForEdit = createAction(
+  '[Products] Select Product for Edit', (product: Product) => ({ product })
 )
 
 export const editProduct = createAction(

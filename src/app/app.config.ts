@@ -11,7 +11,7 @@ import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools'
 import { appState } from './store/app.state';
 import { provideEffects } from '@ngrx/effects';
-import { ProductsEffects } from './store/effects/products.effects';
+import { ProductsEffects } from './modules/products/store/products.effects';
 import { CategoriesEffects } from './store/effects/categories.effects';
 import { httpInterceptor } from './core/interceptors/http.interceptor';
 import { errorsInterceptor } from './core/interceptors/errors.interceptor';

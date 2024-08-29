@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
-import * as productsActions from '../actions/products.action';
-import { Product } from "../../core/interface/interface";
+import * as productsActions from './products.action';
+import { Product } from "../interfaces/products.interface";
 
 export const initialState: any = {
   products: [],
@@ -17,6 +17,13 @@ export const productsReducer = createReducer(initialState,
       products: [...state.products, action.product]
     };
     return state;
+  }),
+  on(productsActions.selectProductForEdit, (state, { product }) => {
+    return {
+      ...state,
+      selectedProduct: product,
+      isEdit : true,
+    };
   }),
   on(productsActions.editProduct, (state, { product }) => {
     const products = state.products.map((p: Product) => p.id === product.id ? product : p);

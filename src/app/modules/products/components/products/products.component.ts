@@ -1,17 +1,18 @@
 import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { decrement, increment, reset } from '../../store/actions/counter.action';
-import { AppState } from '../../store/app.state';
-import { ApisService } from '../../core/services/apis.service';
+import { decrement, increment, reset } from '../../../../store/actions/counter.action';
+import { AppState } from '../../../../store/app.state';
+import { ApisService } from '../../../../core/services/apis.service';
 import { Observable, Subject, takeUntil } from 'rxjs';
-import { Category, Product } from '../../core/interface/interface';
-import { selectProduct } from '../../store/selectors/products.selector';
-import * as productsActions from '../../store/actions/products.action';
-import * as categoriesActions from '../../store/actions/categories.action';
-import { selectCategories } from '../../store/selectors/categories.selector';
+import { Category } from '../../../../core/interface/interface';
+import { selectIsEdit, selectProduct } from '../../store/products.selector';
+import * as productsActions from '../../store/products.action';
+import * as categoriesActions from '../../../../store/actions/categories.action';
+import { selectCategories } from '../../../../store/selectors/categories.selector';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HttpService } from '../../core/services/http.service';
+import { HttpService } from '../../../../core/services/http.service';
 import { AsyncPipe, isPlatformBrowser } from '@angular/common';
+import { Product } from '../../interfaces/products.interface';
 
 @Component({
   selector: 'app-products',
@@ -35,6 +36,7 @@ export class ProductsComponent {
   products$: Observable<Product[]>;
   categories$: Observable<Category[]>;
 
+
   isEdit: boolean = false;
 
   private id = '';
@@ -47,7 +49,6 @@ export class ProductsComponent {
   constructor() {
     this.categories$ = this.store.select(selectCategories);
     this.products$ = this.store.select(selectProduct);
-
   }
 
   ngOnInit(): void {
@@ -55,7 +56,16 @@ export class ProductsComponent {
       this.initForm();
       this.loadCategories();
       this.loadProducts();
+      this.isEditFn();
     }
+  }
+
+  isEditFn() {
+    this.store.select(selectIsEdit).pipe(takeUntil(this.destroy)).subscribe({
+      next: (res) => {
+        this.isEdit = res;
+      },
+    })
   }
 
   initForm(): void {
@@ -97,16 +107,16 @@ reqStatus(status: number) {
     }
   }
 
-  setProduct(product: Product) {
-    this.isEdit = true;
+  selectProductForEdit(product: Product) {
     if (product) {
+      this.store.dispatch(productsActions.selectProductForEdit( product ));
       this.id = product.id ? product.id : '';
       this.createForm.patchValue(product);
     }
   }
 
   editProduct() {
-    this.isEdit = false;
+    // this.isEdit = false;
     const product = { id: this.id, ...this.createForm.value };
     this.store.dispatch(productsActions.editProduct( product ));
     this.id = '';
