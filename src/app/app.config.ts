@@ -15,12 +15,13 @@ import { ProductsEffects } from './store/effects/products.effects';
 import { CategoriesEffects } from './store/effects/categories.effects';
 import { httpInterceptor } from './core/interceptors/http.interceptor';
 import { errorsInterceptor } from './core/interceptors/errors.interceptor';
+import { loadingInterceptor } from './core/interceptors/loading.interceptor';
 
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideHttpClient(withInterceptors([httpInterceptor, errorsInterceptor])),
+    provideHttpClient(withInterceptors([httpInterceptor, errorsInterceptor, loadingInterceptor])),
     provideAnimations(),
     provideRouterStore(),
     provideStore(appState),

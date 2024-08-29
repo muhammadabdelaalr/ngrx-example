@@ -19,11 +19,11 @@
   ],
   "products": [
     {
+      "id": "1",
       "name": "Item 1",
       "desc": "Description of Item 1",
       "category": "Category 1",
-      "img": "/1.jpg",
-      "id": "1"
+      "img": "/1.jpg"
     },
     {
       "name": "Item 2",
@@ -56,7 +56,7 @@
     {
       "id": "97b3",
       "name": "item 6",
-      "desc": "desc",
+      "desc": "desc aaa",
       "category": "Category 3",
       "img": "https://picsum.photos/300/200"
     }

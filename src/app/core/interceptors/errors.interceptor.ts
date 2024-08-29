@@ -1,7 +1,41 @@
 import { HttpErrorResponse, HttpInterceptorFn, HttpResponse } from '@angular/common/http';
 import { catchError, map, throwError } from 'rxjs';
-import Swal from 'sweetalert2';
+import Swal, { SweetAlertOptions } from 'sweetalert2';
 
+let errorssssss: { [key: number]: (message?: string) => SweetAlertOptions } = {
+  401: () => ({
+    icon: 'warning',
+    title: 'Unauthorized',
+    text: "Please login again. If you are still logged in, please refresh the page",
+  }),
+  403:
+    () => ({
+      icon: 'error',
+      title: 'Forbidden',
+      text: "You are not authorized to perform this action",
+    }),
+  404: () => ({
+    icon: 'error',
+    title: 'Not found',
+    text: "The page you are looking for does not exist or has been removed",
+  }),
+  406: () => ({
+    icon: 'error',
+    title: 'Not acceptable',
+    text: "The server cannot respond to this request because the content type is not acceptable",
+  }),
+  500: (message?: string) => ({
+    icon: 'error',
+    title: 'Internal server error',
+    text: "Please contact the administrator. Error message: " + message,
+  })
+}
+
+const defaultError = {
+  icon: 'error',
+  title: 'Error',
+  text: "something went wrong",
+}
 const sharedSwal = Swal.mixin({
   toast: true,
   position: 'top-end',
@@ -54,52 +88,10 @@ export const errorsInterceptor: HttpInterceptorFn = (req, next) => {
     return event;
   }),
     catchError((error: HttpErrorResponse) => {
-      switch (error.status) {
-        case 401:
-          sharedSwal.fire({
-            icon: 'warning',
-            title: 'Unauthorized',
-            text: "Please login again. If you are still logged in, please refresh the page",
-          })
-          break;
-        case 403:
-          sharedSwal.fire({
-            icon: 'error',
-            title: 'Forbidden',
-            text: "You are not authorized to perform this action",
-          })
-          break;
-        case 404:
-          sharedSwal.fire({
-            icon: 'error',
-            title: 'Not found',
-            text: "The page you are looking for does not exist or has been removed",
-          })
-          break;
-        case 406:
-          sharedSwal.fire({
-            icon: 'error',
-            title: 'Not acceptable',
-            text: "The server cannot respond to this request because the content type is not acceptable",
-          })
-          break;
-        case 500:
-          sharedSwal.fire({
-            icon: 'error',
-            title: 'Internal server error',
-            text: "Please contact the administrator. Error message: " + error.message,
-          })
-          break;
-        default:
-          sharedSwal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: "something went wrong",
-          })
-          break;
-      }
+      sharedSwal.fire(errorssssss[error.status](error.message) || defaultError)
       return throwError(error);
     })
   );
 };
+
 

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { decrement, increment, reset } from '../../store/actions/counter.action';
 import { AppState } from '../../store/app.state';
@@ -11,7 +11,7 @@ import * as categoriesActions from '../../store/actions/categories.action';
 import { selectCategories } from '../../store/selectors/categories.selector';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpService } from '../../core/services/http.service';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-products',
@@ -23,10 +23,12 @@ import { AsyncPipe } from '@angular/common';
     HttpService
   ],
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent {
   private store = inject(Store<AppState>);
   private api = inject(ApisService);
   private _http = inject(HttpService);
+
+  platformId = inject(PLATFORM_ID);
 
   private destroy = new Subject<void>();
 
@@ -49,9 +51,11 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initForm();
-    this.loadCategories();
-    this.loadProducts();
+    if(this.platformId === 'browser') {
+      this.initForm();
+      this.loadCategories();
+      this.loadProducts();
+    }
   }
 
   initForm(): void {
@@ -102,20 +106,20 @@ reqStatus(status: number) {
   }
 
   editProduct() {
-    this.api.editProduct(this.id, this.createForm.value).pipe(takeUntil(this.destroy)).subscribe(() => {
-      this.isEdit = false;
-      const product = { id: this.id, ...this.createForm.value };
-      this.store.dispatch(productsActions.editProduct( product ));
-      this.id = '';
-      this.createForm.reset();
-    })
+    this.isEdit = false;
+    const product = { id: this.id, ...this.createForm.value };
+    this.store.dispatch(productsActions.editProduct( product ));
+    this.id = '';
+    this.createForm.reset();
+    // this.api.editProduct(this.id, this.createForm.value).pipe(takeUntil(this.destroy)).subscribe(() => {
+    // })
   }
 
   deleteProduct(product: Product) {
     const id = product.id || '';
-    this.api.deleteProduct(id).pipe(takeUntil(this.destroy)).subscribe(() => {
-      this.store.dispatch(productsActions.loadProducts());
-    });
+    this.store.dispatch(productsActions.loadProducts());
+    // this.api.deleteProduct(id).pipe(takeUntil(this.destroy)).subscribe(() => {
+    // });
   }
 
   increment() {
